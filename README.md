@@ -15,7 +15,7 @@ Live Website: **https://dulandhanush.github.io/MarketScope**
 - 📱 **Fully Responsive UI**  
 - 🎨 **Modern Minimal Design**  
 - 🧭 **Clean Navigation Bar** connecting all market sections  
-- 📑 “Load More” pagination button for extended news browsing
+- 📑 “Load More” pagination button for extended browsing
 
 ---
 
