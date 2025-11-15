@@ -41,7 +41,6 @@ MarketScope was developed to:
 ---
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-1.0-blue?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-orange?style=flat-square)
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-success?style=flat-square)
 
 ---
@@ -49,16 +48,16 @@ MarketScope was developed to:
 
 Here are planned improvements and next steps:
 
--⭐ Save favorite news articles
--🔍 Add keyword search for news
--🤖 AI-based market summaries (long-term plan)
+- ⭐ Save favorite news articles
+- 🔍 Add keyword search for news
+- 🤖 AI-based market summaries (long-term plan)
 
 ---
 ##👤 Author
 
 Dulan Dhanush
--GitHub: https://github.com/DulanDhanush
--Portfolio: https://dulandhanush.github.io/portfolio-website/
+- GitHub: https://github.com/DulanDhanush
+- Portfolio: https://dulandhanush.github.io/portfolio-website/
 
 ---
 ##📄 License
@@ -68,9 +67,9 @@ This project is licensed under the Apache 2.0 License.
 ---
 ##🙌 Acknowledgments
 
--API services & open data sources (planned integrations)
--UI inspiration from modern financial dashboards
--Hosted using GitHub Pages
+- API services & open data sources (planned integrations)
+- UI inspiration from modern financial dashboards
+- Hosted using GitHub Pages
 
 
 <img width="1896" height="866" alt="image" src="https://github.com/user-attachments/assets/5ecd8a2d-e8d9-49a9-95e6-70bf54e58a53" />
