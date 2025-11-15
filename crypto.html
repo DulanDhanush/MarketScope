@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketScope - Cryptocurrency Markets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/crypto.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Market<span>Scope</span></a>
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="crypto.html" class="active">Crypto</a>
+            <a href="stocks.html">Stocks</a>
+            <a href="forex.html">Forex</a>
+            <a href="news.html">News</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <a href="index.html#contact" class="gradient-btn">Contact Us</a>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="crypto-section">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <div class="header-badge">
+                        <i class='bx bxs-coin-stack'></i>
+                        Live Cryptocurrency Data
+                    </div>
+                    <h1>Cryptocurrency Markets</h1>
+                    <p>Track real-time prices, market trends, and comprehensive insights for thousands of cryptocurrencies</p>
+                </div>
+
+                <!-- Market Stats -->
+                <div class="market-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bx-line-chart'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Market Cap</h3>
+                            <div class="stat-value" id="total-market-cap">$1.72T</div>
+                            <div class="stat-change positive">+3.2%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bx-trending-up'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>24h Volume</h3>
+                            <div class="stat-value" id="total-volume">$68.4B</div>
+                            <div class="stat-change positive">+12.5%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class='bx bxs-coin'></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>BTC Dominance</h3>
+                            <div class="stat-value" id="btc-dominance">52.3%</div>
+                            <div class="stat-change negative">-1.2%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search & Filters -->
+                <div class="search-filters-container">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class='bx bx-search'></i>
+                            <input type="text" id="crypto-search" placeholder="Search cryptocurrencies... (e.g., Bitcoin, ETH, SOL)">
+                            <button class="clear-search" id="clear-crypto-search">
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </div>
+                        <div class="search-results-info" id="crypto-results-info"></div>
+                    </div>
+
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label>Sort by:</label>
+                            <select id="sort-by">
+                                <option value="market_cap">Market Cap</option>
+                                <option value="price">Price</option>
+                                <option value="volume">Volume</option>
+                                <option value="change">24h Change</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Show:</label>
+                            <select id="show-count">
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crypto Grid -->
+                <div class="crypto-grid" id="crypto-grid"></div>
+
+                <!-- Loading & No Results -->
+                <div class="loading" id="loading">
+                    <div class="loading-spinner">
+                        <i class='bx bx-loader-alt bx-spin'></i>
+                    </div>
+                    <p>Loading cryptocurrency data...</p>
+                </div>
+                
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class='bx bx-search-alt'></i>
+                    <h3>No cryptocurrencies found</h3>
+                    <p>Try searching with different keywords or check your spelling</p>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container" id="load-more-container" style="display: none;">
+                    <button class="gradient-btn outline" id="load-more">
+                        <i class='bx bx-plus'></i>
+                        Load More Cryptos
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Dulan Dhanush. All rights reserved.</p>
+            <div class="footer-links">
+             
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/crypto.js"></script>
+</body>
+</html>

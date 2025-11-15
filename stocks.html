@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketScope - Stock Markets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stocks.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Market<span>Scope</span></a>
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="crypto.html">Crypto</a>
+            <a href="stocks.html" class="active">Stocks</a>
+            <a href="forex.html">Forex</a>
+            <a href="news.html">News</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <a href="index.html#contact" class="gradient-btn">Contact Us</a>
+    </header>
+
+    <main>
+        <section class="stocks-section">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <div class="header-badge">
+                        <i class='bx bxs-bar-chart-alt-2'></i>
+                        Live Stock Market Data
+                    </div>
+                    <h1>Stock Markets</h1>
+                    <p>Track real-time stock prices, market indices, and comprehensive equity analysis</p>
+                </div>
+
+                <!-- Market Overview -->
+                <div class="market-overview">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class='bx bx-trending-up'></i>
+                        </div>
+                        <div class="overview-content">
+                            <h3>S&P 500</h3>
+                            <div class="overview-price" id="sp500-price">4,780.94</div>
+                            <div class="overview-change positive">+0.8%</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class='bx bx-line-chart'></i>
+                        </div>
+                        <div class="overview-content">
+                            <h3>NASDAQ</h3>
+                            <div class="overview-price" id="nasdaq-price">16,987.55</div>
+                            <div class="overview-change positive">+1.2%</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class='bx bx-stats'></i>
+                        </div>
+                        <div class="overview-content">
+                            <h3>DOW JONES</h3>
+                            <div class="overview-price" id="dow-price">37,468.61</div>
+                            <div class="overview-change negative">-0.3%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search & Filters -->
+                <div class="search-filters-container">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class='bx bx-search'></i>
+                            <input type="text" id="stocks-search" placeholder="Search stocks... (e.g., Apple, AAPL, Technology)">
+                            <button class="clear-search" id="clear-stocks-search">
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </div>
+                        <div class="search-results-info" id="stocks-results-info"></div>
+                    </div>
+
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label>Market:</label>
+                            <select id="market-filter">
+                                <option value="all">All Markets</option>
+                                <option value="nyse">NYSE</option>
+                                <option value="nasdaq">NASDAQ</option>
+                                <option value="amex">AMEX</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Sort by:</label>
+                            <select id="sort-by">
+                                <option value="market_cap">Market Cap</option>
+                                <option value="price">Price</option>
+                                <option value="change">Daily Change</option>
+                                <option value="volume">Volume</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Sector:</label>
+                            <select id="sector-filter">
+                                <option value="all">All Sectors</option>
+                                <option value="technology">Technology</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="financial">Financial</option>
+                                <option value="consumer">Consumer</option>
+                                <option value="industrial">Industrial</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stocks Grid -->
+                <div class="stocks-grid" id="stocks-grid"></div>
+
+                <!-- Loading & No Results -->
+                <div class="loading" id="loading">
+                    <div class="loading-spinner">
+                        <i class='bx bx-loader-alt bx-spin'></i>
+                    </div>
+                    <p>Loading stock market data...</p>
+                </div>
+                
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class='bx bx-search-alt'></i>
+                    <h3>No stocks found</h3>
+                    <p>Try searching with different keywords or check your spelling</p>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container" id="load-more-container" style="display: none;">
+                    <button class="gradient-btn outline" id="load-more">
+                        <i class='bx bx-plus'></i>
+                        Load More Stocks
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Dulan Dhanush. All rights reserved.</p>
+            <div class="footer-links">
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/stocks.js"></script>
+</body>
+</html>

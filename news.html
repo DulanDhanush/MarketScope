@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketScope - Market News & Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">Market<span>Scope</span></a>
+        <i class="bx bx-menu" id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="crypto.html">Crypto</a>
+            <a href="stocks.html">Stocks</a>
+            <a href="forex.html">Forex</a>
+            <a href="news.html" class="active">News</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <a href="index.html#contact" class="gradient-btn">Contact Us</a>
+    </header>
+
+    <main>
+        <section class="news-section">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <div class="header-badge">
+                        <i class='bx bx-news'></i>
+                        Live Market Updates
+                    </div>
+                    <h1>Market News & Analysis</h1>
+                    <p>Stay informed with the latest financial news, market insights, and expert analysis across all asset classes</p>
+                </div>
+
+                <!-- Breaking News Banner -->
+                <div class="breaking-news" id="breaking-news" style="display: none;">
+                    <div class="breaking-label">
+                        <i class='bx bx-bell'></i>
+                        Breaking News
+                    </div>
+                    <div class="breaking-content">
+                        <span class="breaking-text" id="breaking-text"></span>
+                    </div>
+                </div>
+
+                <!-- News Filters -->
+                <div class="news-filters-container">
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label>Category:</label>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" data-filter="all">All News</button>
+                                <button class="filter-btn" data-filter="crypto">
+                                    <i class='bx bxs-coin'></i>
+                                    Crypto
+                                </button>
+                                <button class="filter-btn" data-filter="stocks">
+                                    <i class='bx bxs-bar-chart-alt-2'></i>
+                                    Stocks
+                                </button>
+                                <button class="filter-btn" data-filter="forex">
+                                    <i class='bx bx-transfer-alt'></i>
+                                    Forex
+                                </button>
+                                <button class="filter-btn" data-filter="economy">
+                                    <i class='bx bx-trending-up'></i>
+                                    Economy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <label>Sort by:</label>
+                            <select id="sort-by">
+                                <option value="latest">Latest</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="trending">Trending</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Section -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class='bx bx-search'></i>
+                        <input type="text" id="news-search" placeholder="Search news... (e.g., Bitcoin, Fed, Earnings)">
+                        <button class="clear-search" id="clear-news-search">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </div>
+                    <div class="search-results-info" id="news-results-info"></div>
+                </div>
+
+                <!-- News Grid -->
+                <div class="news-grid" id="news-grid"></div>
+
+                <!-- Loading & No Results -->
+                <div class="loading" id="loading">
+                    <div class="loading-spinner">
+                        <i class='bx bx-loader-alt bx-spin'></i>
+                    </div>
+                    <p>Loading latest market news...</p>
+                </div>
+                
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class='bx bx-search-alt'></i>
+                    <h3>No news articles found</h3>
+                    <p>Try searching with different keywords or check back later for updates</p>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container" id="load-more-container" style="display: none;">
+                    <button class="gradient-btn outline" id="load-more">
+                        <i class='bx bx-plus'></i>
+                        Load More Articles
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Dulan Dhanush. All rights reserved.</p>
+            <div class="footer-links">
+               
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/news.js"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Free Market Analysis Dashboard">
+    <title>MarketScope - Real-Time Market Intelligence</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+   <header class="header">
+       <a href="index.html" class="logo">
+           Market<span>Scope</span>
+       </a>
+
+       <i class="bx bx-menu" id="menu-icon" aria-label="open menu" role="button" tabindex="0"></i>
+
+       <nav class="navbar">
+           <a href="index.html" class="active">Home</a>
+           <a href="crypto.html">Crypto</a>
+           <a href="stocks.html">Stocks</a>
+           <a href="forex.html">Forex</a>
+           <a href="news.html">News</a>
+           <a href="#about">About</a>
+           <a href="#contact">Contact</a>
+       </nav>
+
+       <a href="#contact" class="gradient-btn" aria-label="Contact me">Get Started</a>
+   </header>
+
+   <main>
+       <!-- Hero Section -->
+       <section class="hero" id="home">
+           <div class="hero-container">
+               <div class="hero-content">
+                   <div class="hero-badge">
+                       <span>🚀 Real-time Data</span>
+                   </div>
+                   <h1 class="hero-title">Market Intelligence <span class="gradient-text">Reimagined</span></h1>
+                   <h2 class="hero-subtitle">Track Crypto, Stocks & Forex in One Platform</h2>
+                   <p class="hero-description">Stay ahead of the markets with live data, comprehensive analysis, and insights across all major financial instruments. Make informed decisions with real-time market intelligence.</p>
+                   
+                   <div class="hero-actions">
+                       <a href="#markets" class="gradient-btn primary-btn">
+                           <i class='bx bx-trending-up'></i>
+                           Explore Markets
+                       </a>
+                       <a href="#features" class="outline-btn">
+                           <i class='bx bx-play-circle'></i>
+                           See Features
+                       </a>
+                   </div>
+
+                   <!-- Live Stats Ticker -->
+                   <div class="live-ticker">
+                       <div class="ticker-label">
+                           <i class='bx bx-pulse'></i>
+                           Live Markets
+                       </div>
+                       <div class="ticker-content">
+                           <div class="ticker-item">
+                               <span class="ticker-symbol">BTC</span>
+                               <span class="ticker-price" id="ticker-btc">$43,250</span>
+                               <span class="ticker-change positive">+2.3%</span>
+                           </div>
+                           <div class="ticker-item">
+                               <span class="ticker-symbol">SPX</span>
+                               <span class="ticker-price" id="ticker-spx">4,780</span>
+                               <span class="ticker-change positive">+0.8%</span>
+                           </div>
+                           <div class="ticker-item">
+                               <span class="ticker-symbol">EUR/USD</span>
+                               <span class="ticker-price" id="ticker-eurusd">1.0950</span>
+                               <span class="ticker-change negative">-0.2%</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               
+               <div class="hero-visual">
+                   <div class="floating-cards">
+                       <div class="floating-card crypto-card">
+                           <div class="card-header">
+                               <div class="card-icon">
+                                   <i class='bx bxs-coin'></i>
+                               </div>
+                               <div class="card-info">
+                                   <h4>Bitcoin</h4>
+                                   <span>BTC</span>
+                               </div>
+                           </div>
+                           <div class="card-price" id="visual-btc">$43,250.75</div>
+                           <div class="card-change positive">+2.34%</div>
+                       </div>
+                       
+                       <div class="floating-card stock-card">
+                           <div class="card-header">
+                               <div class="card-icon">
+                                   <i class='bx bxs-chart'></i>
+                               </div>
+                               <div class="card-info">
+                                   <h4>Apple Inc.</h4>
+                                   <span>AAPL</span>
+                               </div>
+                           </div>
+                           <div class="card-price" id="visual-aapl">$185.63</div>
+                           <div class="card-change positive">+1.25%</div>
+                       </div>
+                       
+                       <div class="floating-card forex-card">
+                           <div class="card-header">
+                               <div class="card-icon">
+                                   <i class='bx bx-transfer-alt'></i>
+                               </div>
+                               <div class="card-info">
+                                   <h4>EUR/USD</h4>
+                                   <span>Forex</span>
+                               </div>
+                           </div>
+                           <div class="card-price" id="visual-eurusd">1.0950</div>
+                           <div class="card-change negative">-0.24%</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Animated Background -->
+           <div class="hero-background">
+               <div class="floating-shape shape-1"></div>
+               <div class="floating-shape shape-2"></div>
+               <div class="floating-shape shape-3"></div>
+           </div>
+       </section>
+
+       <!-- Quick Stats Section -->
+       <section class="quick-stats" id="markets">
+           <div class="container">
+               <h2 class="section-title">Market Overview</h2>
+               <p class="section-subtitle">Real-time performance across major asset classes</p>
+               
+               <div class="stats-grid">
+                   <div class="stat-card large">
+                       <div class="stat-header">
+                           <div class="stat-icon">
+                               <i class='bx bxs-coin-stack'></i>
+                           </div>
+                           <div class="stat-info">
+                               <h3>Cryptocurrency</h3>
+                               <p>Digital Assets</p>
+                           </div>
+                       </div>
+                       <div class="stat-content">
+                           <div class="main-stat">
+                               <div class="value" id="crypto-market-cap">$1.72T</div>
+                               <div class="change positive">+3.2%</div>
+                           </div>
+                           <div class="stat-items">
+                               <div class="stat-item">
+                                   <span class="label">BTC Dominance</span>
+                                   <span class="value">52.3%</span>
+                               </div>
+                               <div class="stat-item">
+                                   <span class="label">24h Volume</span>
+                                   <span class="value">$68.4B</span>
+                               </div>
+                           </div>
+                       </div>
+                       <a href="crypto.html" class="stat-link">
+                           View All Cryptos
+                           <i class='bx bx-chevron-right'></i>
+                       </a>
+                   </div>
+
+                   <div class="stat-card large">
+                       <div class="stat-header">
+                           <div class="stat-icon">
+                               <i class='bx bxs-bar-chart-alt-2'></i>
+                           </div>
+                           <div class="stat-info">
+                               <h3>Stock Market</h3>
+                               <p>Equities & Indices</p>
+                           </div>
+                       </div>
+                       <div class="stat-content">
+                           <div class="main-stat">
+                               <div class="value" id="stock-market-cap">$109.2T</div>
+                               <div class="change positive">+0.8%</div>
+                           </div>
+                           <div class="stat-items">
+                               <div class="stat-item">
+                                   <span class="label">S&P 500</span>
+                                   <span class="value">4,780.94</span>
+                               </div>
+                               <div class="stat-item">
+                                   <span class="label">VIX Index</span>
+                                   <span class="value">13.25</span>
+                               </div>
+                           </div>
+                       </div>
+                       <a href="stocks.html" class="stat-link">
+                           View All Stocks
+                           <i class='bx bx-chevron-right'></i>
+                       </a>
+                   </div>
+
+                   <div class="stat-card large">
+                       <div class="stat-header">
+                           <div class="stat-icon">
+                               <i class='bx bx-globe'></i>
+                           </div>
+                           <div class="stat-info">
+                               <h3>Forex Market</h3>
+                               <p>Currency Pairs</p>
+                           </div>
+                       </div>
+                       <div class="stat-content">
+                           <div class="main-stat">
+                               <div class="value" id="forex-volume">$7.5T</div>
+                               <div class="change positive">+1.1%</div>
+                           </div>
+                           <div class="stat-items">
+                               <div class="stat-item">
+                                   <span class="label">DXY Index</span>
+                                   <span class="value">102.35</span>
+                               </div>
+                               <div class="stat-item">
+                                   <span class="label">Most Active</span>
+                                   <span class="value">EUR/USD</span>
+                               </div>
+                           </div>
+                       </div>
+                       <a href="forex.html" class="stat-link">
+                           View Forex Pairs
+                           <i class='bx bx-chevron-right'></i>
+                       </a>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Features Section -->
+       <section class="features" id="features">
+           <div class="container">
+               <h2 class="section-title">Why Choose MarketScope?</h2>
+               <p class="section-subtitle">Powerful features designed for modern traders and investors</p>
+               
+               <div class="features-grid">
+                   <div class="feature-card">
+                       <div class="feature-icon">
+                           <i class='bx bx-rocket'></i>
+                       </div>
+                       <h3>Real-time Data</h3>
+                       <p>Get live market data with millisecond updates across all major financial instruments and exchanges.</p>
+                       <ul class="feature-list">
+                           <li><i class='bx bx-check'></i> Live price updates</li>
+                           <li><i class='bx bx-check'></i> Instant order books</li>
+                           <li><i class='bx bx-check'></i> Real-time charts</li>
+                       </ul>
+                   </div>
+
+                 
+
+                  
+
+                   <div class="feature-card">
+                       <div class="feature-icon">
+                           <i class='bx bx-news'></i>
+                       </div>
+                       <h3>Market News</h3>
+                       <p>Curated financial news and analysis from trusted sources to keep you informed about market movements.</p>
+                       <ul class="feature-list">
+                           <li><i class='bx bx-check'></i> Breaking news</li>
+                           <li><i class='bx bx-check'></i> Expert analysis</li>
+                          
+                       </ul>
+                   </div>
+
+                   <div class="feature-card">
+                       <div class="feature-icon">
+                           <i class='bx bx-mobile-alt'></i>
+                       </div>
+                       <h3>Mobile Friendly</h3>
+                       <p>Access your dashboard anywhere with our fully responsive design optimized for all devices.</p>
+                       <ul class="feature-list">
+                           <li><i class='bx bx-check'></i> Responsive design</li>
+                           <li><i class='bx bx-check'></i> Touch optimized</li>
+                          
+                       </ul>
+                   </div>
+
+                 
+               </div>
+           </div>
+       </section>
+
+       <!-- About Section -->
+       <section class="about" id="about">
+           <div class="container">
+               <div class="about-content">
+                   <div class="about-text">
+                       <h2 class="section-title">About MarketScope</h2>
+                       <p class="about-description">
+                           MarketScope is a comprehensive market analysis platform that provides real-time data, 
+                           advanced analytics, and actionable insights for cryptocurrency, stock, and forex markets. 
+                           Our mission is to democratize access to professional-grade market intelligence.
+                       </p>
+                       <div class="about-features">
+                           <div class="about-feature">
+                               <i class='bx bx-check-circle'></i>
+                               <span>Real-time market data from multiple sources</span>
+                           </div>
+                        
+                       
+                           <div class="about-feature">
+                               <i class='bx bx-check-circle'></i>
+                               <span>Professional-grade charting capabilities</span>
+                           </div>
+                       </div>
+                       <div class="about-actions">
+                           <a href="https://github.com/DulanDhanush/MarketScope/blob/main/README.md" target="_blank" class="gradient-btn">Learn More</a>
+                       </div>
+                   </div>
+                   <div class="about-visual">
+                       <div class="visual-card">
+                           <div class="card-header">
+                               <h4>Our Vision</h4>
+                           </div>
+                           <p>To create the most comprehensive and accessible market intelligence platform for traders of all levels.</p>
+                       </div>
+                       <div class="visual-card">
+                           <div class="card-header">
+                               <h4>Our Mission</h4>
+                           </div>
+                           <p>Empower traders with real-time data, advanced tools, and actionable insights to make better investment decisions.</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Contact Section -->
+       <!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+              
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class='bx bx-support'></i>
+                    </div>
+                    <h4>Support</h4>
+                    <p>Technical Assistance</p>
+                    <span>Get help with platform features</span>
+                </div>
+                
+              
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm" action="https://formspree.io/f/xvgdaqln" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="support">Technical Support</option>
+                            <option value="sales">Sales Inquiry</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="gradient-btn primary-btn full-width">
+                        <i class='bx bx-paper-plane'></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+   </main>
+
+   <footer class="footer">
+       <div class="container">
+           <div class="footer-content">
+               <div class="footer-section">
+                   <div class="footer-logo">
+                       <a href="index.html" class="logo">Market<span>Scope</span></a>
+                   </div>
+                   <p class="footer-description">
+                       Your comprehensive market analysis platform for cryptocurrency, stocks, and forex trading.
+                   </p>
+                   <div class="social-links">
+                       <a href="https://x.com/RavoPrime?s=09" aria-label="Twitter" target="_blank"><i class='bx bxl-twitter'></i></a>
+                       <a href="https://www.linkedin.com/in/dulan-dhanush-b76a44300?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                       <a href="https://github.com/DulanDhanush" aria-label="GitHub" target="_blank"><i class='bx bxl-github'></i></a>
+                       <a href="http://t.me/dulan_dhanush" aria-label="Telegram" target="_blank"><i class='bx bxl-telegram'></i></a>
+                   </div>
+               </div>
+               
+               <div class="footer-section">
+                   <h4>Markets</h4>
+                   <ul>
+                       <li><a href="crypto.html">Cryptocurrency</a></li>
+                       <li><a href="stocks.html">Stock Market</a></li>
+                       <li><a href="forex.html">Forex Trading</a></li>
+                       <li><a href="news.html">Market News</a></li>
+                   </ul>
+               </div>
+               
+               <div class="footer-section">
+                   <h4>Resources</h4>
+                   <ul>
+                       <li><a href="https://github.com/DulanDhanush/MarketScope/blob/main/README.md" target="_blank">Documentation</a></li>
+                      
+                   </ul>
+               </div>
+               
+               <div class="footer-section">
+                   <h4>Company</h4>
+                   <ul>
+                       <li><a href="https://dulandhanush.github.io/portfolio-website/" target="_blank">About Us</a></li>
+                     
+                   </ul>
+               </div>
+           </div>
+           
+           <div class="footer-bottom">
+               <p>&copy; 2025 Dulan Dhanush. All rights reserved.</p>
+               <div class="footer-links">
+                   
+               </div>
+           </div>
+       </div>
+   </footer>
+
+   <script src="js/main.js"></script>
+</body>
+</html>
