@@ -1,0 +1,1072 @@
+/* ===================== Reset & Base Styles ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0a0e27;
+    --bg-secondary: #151932;
+    --bg-card: #1a1f3a;
+    --bg-card-hover: #21274a;
+    --accent-blue: #00d4ff;
+    --accent-purple: #a855f7;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --accent-orange: #f59e0b;
+    --accent-yellow: #eab308;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 212, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --gradient: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+    --gradient-hover: linear-gradient(135deg, #00c4ff 0%, #9b46f0 100%);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ===================== Header & Navigation ===================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo span {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo:hover {
+    transform: translateY(-1px);
+}
+
+.navbar {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.navbar a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--text-primary);
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    width: 100%;
+}
+
+.gradient-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gradient-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: var(--gradient-hover);
+}
+
+.gradient-btn.outline {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.gradient-btn.outline:hover {
+    border-color: var(--accent-blue);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+#menu-icon {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: none;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+#menu-icon:hover {
+    color: var(--accent-blue);
+}
+
+/* Menu Icon Animation */
+body.menu-open #menu-icon {
+    transform: rotate(90deg);
+    color: var(--accent-blue);
+}
+
+/* ===================== Stocks Section ===================== */
+.stocks-section {
+    padding: 4rem 0;
+    min-height: 100vh;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.section-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===================== Market Overview ===================== */
+.market-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.overview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient);
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.overview-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.overview-content h3 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.overview-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.overview-change {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.overview-change.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent-green);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.overview-change.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* ===================== Search & Filters ===================== */
+.search-filters-container {
+    margin-bottom: 3rem;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.search-box i {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    padding: 0.8rem 0;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: var(--text-secondary);
+}
+
+.clear-search {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-search:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+}
+
+.search-results-info {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    min-height: 1.2rem;
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filter-group label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.filter-group select {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+}
+
+/* ===================== Stocks Grid ===================== */
+.stocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.stock-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.stock-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stock-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stock-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.stock-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.stock-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stock-symbol {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.stock-sector {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    background: rgba(0, 212, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.stock-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stock-change {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stock-change.positive {
+    color: var(--accent-green);
+}
+
+.stock-change.negative {
+    color: var(--accent-red);
+}
+
+.stock-details {
+    border-top: 1px solid var(--border-light);
+    padding-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.stock-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Sector-specific colors */
+.sector-technology { background: rgba(0, 212, 255, 0.1); color: var(--accent-blue); }
+.sector-healthcare { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+.sector-financial { background: rgba(245, 158, 11, 0.1); color: var(--accent-orange); }
+.sector-consumer { background: rgba(234, 179, 8, 0.1); color: var(--accent-yellow); }
+.sector-industrial { background: rgba(168, 85, 247, 0.1); color: var(--accent-purple); }
+
+/* ===================== Loading & No Results ===================== */
+.loading {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+}
+
+.loading-spinner {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-blue);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-secondary);
+}
+
+.no-results i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.no-results p {
+    font-size: 1rem;
+}
+
+/* ===================== Load More ===================== */
+.load-more-container {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+/* ===================== Highlight ===================== */
+.highlight {
+    background: linear-gradient(120deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    padding: 0 2px;
+}
+
+/* ===================== Footer ===================== */
+.footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-blue);
+}
+
+/* ===================== Mobile Responsive Design ===================== */
+@media (max-width: 1024px) {
+    .stocks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    
+    .section-header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+    
+    .header {
+        padding: 1rem 1.5rem;
+    }
+    
+    /* Mobile Menu Fix */
+    .navbar {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 100%);
+        flex-direction: column;
+        gap: 0;
+        background: rgba(10, 14, 39, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 2rem 1.5rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .navbar a {
+        padding: 1.25rem 0;
+        border-bottom: 1px solid var(--border-light);
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem;
+        justify-content: center;
+    }
+    
+    .navbar a:last-child {
+        border-bottom: none;
+    }
+    
+    .navbar a::after {
+        display: none;
+    }
+    
+    #menu-icon {
+        display: block;
+    }
+    
+    /* Hide Get Started button on mobile */
+    .header .gradient-btn {
+        display: none;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    /* Stocks Section Mobile */
+    .stocks-section {
+        padding: 2rem 0;
+    }
+    
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .section-header h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+    
+    /* Market Overview Mobile */
+    .market-overview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .overview-card {
+        padding: 1.25rem;
+    }
+    
+    .overview-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .overview-price {
+        font-size: 1.5rem;
+    }
+    
+    /* Search & Filters Mobile */
+    .search-container {
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-box {
+        padding: 0.5rem 1rem;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .filter-group {
+        width: 100%;
+        max-width: 250px;
+        justify-content: space-between;
+    }
+    
+    .filter-group select {
+        flex: 1;
+        max-width: 150px;
+    }
+    
+    /* Stocks Grid Mobile */
+    .stocks-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stock-card {
+        padding: 1.25rem;
+    }
+    
+    .stock-header {
+        gap: 0.75rem;
+    }
+    
+    .stock-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .stock-name {
+        font-size: 1.1rem;
+    }
+    
+    .stock-price {
+        font-size: 1.5rem;
+    }
+    
+    .stock-details {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    /* Footer Mobile */
+    .footer .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .footer {
+        margin-top: 2rem;
+        padding: 1.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .stocks-section {
+        padding: 1.5rem 0;
+    }
+    
+    .section-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .header-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Market Overview Mobile Small */
+    .overview-card {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .overview-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .overview-price {
+        font-size: 1.3rem;
+    }
+    
+    /* Stock Card Mobile Small */
+    .stock-card {
+        padding: 1rem;
+    }
+    
+    .stock-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .stock-name {
+        font-size: 1rem;
+    }
+    
+    .stock-price {
+        font-size: 1.3rem;
+    }
+    
+    .stock-change {
+        font-size: 0.9rem;
+    }
+    
+    .stock-sector {
+        font-size: 0.75rem;
+    }
+    
+    /* Search Box Mobile Small */
+    .search-box {
+        padding: 0.4rem 1rem;
+    }
+    
+    .search-box input {
+        font-size: 0.9rem;
+        padding: 0.6rem 0;
+    }
+    
+    /* Loading & No Results Mobile Small */
+    .loading {
+        padding: 2rem 1rem;
+    }
+    
+    .no-results {
+        padding: 3rem 1rem;
+    }
+    
+    .no-results i {
+        font-size: 3rem;
+    }
+    
+    .no-results h3 {
+        font-size: 1.25rem;
+    }
+    
+    /* Footer Mobile Small */
+    .footer-links {
+        gap: 1rem;
+    }
+    
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    .gradient-btn:hover,
+    .stock-card:hover,
+    .overview-card:hover {
+        transform: none;
+    }
+    
+    .gradient-btn:active,
+    .stock-card:active,
+    .overview-card:active {
+        transform: scale(0.98);
+    }
+    
+    .stock-card:active::before {
+        transform: scaleX(1);
+    }
+    
+    /* Improve touch targets */
+    .navbar a {
+        padding: 1rem 0;
+    }
+    
+    .filter-group select {
+        padding: 0.75rem 1rem;
+    }
+    
+    .stock-sector {
+        padding: 0.4rem 0.75rem;
+    }
+}
+
+/* High-resolution displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .search-box:focus-within {
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    }
+    
+    .stock-card:hover {
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+    
+    .stock-card::before,
+    .overview-card::before {
+        transition: none;
+    }
+}
+
+/* Landscape orientation improvements */
+@media (max-width: 768px) and (orientation: landscape) {
+    .navbar {
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .navbar a {
+        padding: 0.75rem 0;
+    }
+    
+    .stocks-section {
+        padding: 1rem 0;
+    }
+    
+    .market-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stocks-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .stock-card {
+        padding: 0.75rem;
+    }
+    
+    .stock-price {
+        font-size: 1.2rem;
+    }
+    
+    .stock-name {
+        font-size: 0.95rem;
+    }
+    
+    .overview-card {
+        padding: 0.75rem;
+    }
+    
+    .overview-price {
+        font-size: 1.2rem;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group select {
+        max-width: none;
+    }
+}
