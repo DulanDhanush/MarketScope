@@ -224,8 +224,7 @@ async function fetchGNews() {
                 response = await fetch(proxyUrl, {
                     headers: {
                         'Accept': 'application/json',
-                    },
-                    timeout: 10000
+                    }
                 });
                 
                 if (response.ok) {
@@ -281,9 +280,17 @@ function transformGNewsData(articles) {
             readTime: calculateReadTime(content),
             trending: Math.random() > 0.8,
             breaking: index < 2,
-            publishedAt: article.publishedAt
+            publishedAt: article.publishedAt,
+            url: article.url || generateArticleUrl(article.source?.name, title) // Add URL to original article
         };
     });
+}
+
+// Generate a placeholder URL for articles that don't have one
+function generateArticleUrl(source, title) {
+    const sourceSlug = source ? source.toLowerCase().replace(/\s+/g, '-') : 'news';
+    const titleSlug = title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : 'article';
+    return `https://${sourceSlug}.com/${titleSlug}`;
 }
 
 // Make timestamps more current and realistic
@@ -393,7 +400,8 @@ function generateFallbackNewsData() {
             readTime: '3 min read',
             trending: true,
             breaking: true,
-            publishedAt: new Date(now - 45 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 45 * 60 * 1000).toISOString(),
+            url: 'https://www.reuters.com/markets/us/fed-holds-rates-steady-signals-future-cuts-2024-01-31/'
         },
         {
             id: 2,
@@ -408,7 +416,8 @@ function generateFallbackNewsData() {
             readTime: '4 min read',
             trending: true,
             breaking: true,
-            publishedAt: new Date(now - 2 * 60 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 2 * 60 * 60 * 1000).toISOString(),
+            url: 'https://www.coindesk.com/markets/2024/01/31/bitcoin-surges-past-45000-as-etf-inflows-continue/'
         },
         {
             id: 3,
@@ -423,7 +432,8 @@ function generateFallbackNewsData() {
             readTime: '5 min read',
             trending: false,
             breaking: false,
-            publishedAt: new Date(now - 4 * 60 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 4 * 60 * 60 * 1000).toISOString(),
+            url: 'https://www.bloomberg.com/news/articles/2024-01-31/tech-giants-report-strong-q4-earnings-ai-investments-pay-off'
         },
         {
             id: 4,
@@ -438,7 +448,8 @@ function generateFallbackNewsData() {
             readTime: '3 min read',
             trending: false,
             breaking: false,
-            publishedAt: new Date(now - 6 * 60 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 6 * 60 * 60 * 1000).toISOString(),
+            url: 'https://www.ft.com/content/abc123def456'
         },
         {
             id: 5,
@@ -453,7 +464,8 @@ function generateFallbackNewsData() {
             readTime: '4 min read',
             trending: true,
             breaking: false,
-            publishedAt: new Date(now - 8 * 60 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 8 * 60 * 60 * 1000).toISOString(),
+            url: 'https://www.ft.com/markets/global-markets-rally'
         },
         {
             id: 6,
@@ -468,7 +480,8 @@ function generateFallbackNewsData() {
             readTime: '3 min read',
             trending: false,
             breaking: false,
-            publishedAt: new Date(now - 10 * 60 * 60 * 1000).toISOString()
+            publishedAt: new Date(now - 10 * 60 * 60 * 1000).toISOString(),
+            url: 'https://cryptonews.com/ethereum-upgrade-efficiency'
         }
     ];
 }
@@ -599,6 +612,9 @@ function createNewsCard(article) {
                     <span>${article.readTime}</span>
                 </div>
                 <div class="news-actions">
+                    <button class="action-btn read-original" title="Read Original Article" data-url="${article.url}">
+                        <i class='bx bx-link-external'></i>
+                    </button>
                     <button class="action-btn" title="Bookmark">
                         <i class='bx bx-bookmark'></i>
                     </button>
@@ -611,15 +627,38 @@ function createNewsCard(article) {
         </div>
     `;
 
-    // Add click event for reading article
-    card.addEventListener('click', () => {
-        showArticleModal(article);
+    // Add click event for reading article - opens original URL
+    card.addEventListener('click', (e) => {
+        // Don't trigger if clicking on action buttons
+        if (!e.target.closest('.action-btn')) {
+            window.open(article.url, '_blank');
+        }
+    });
+
+    // Add click event for "Read Original" button
+    const readOriginalBtn = card.querySelector('.read-original');
+    readOriginalBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card click event
+        window.open(article.url, '_blank');
+    });
+
+    // Add click events for other action buttons
+    const bookmarkBtn = card.querySelector('.action-btn:not(.read-original)');
+    bookmarkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        bookmarkArticle(article.id);
+    });
+
+    const shareBtn = card.querySelectorAll('.action-btn:not(.read-original)')[1];
+    shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        shareArticle(article.title, article.url);
     });
 
     return card;
 }
 
-// Show article in modal
+// Show article in modal (alternative view)
 function showArticleModal(article) {
     // Create modal element
     const modal = document.createElement('div');
@@ -640,10 +679,13 @@ function showArticleModal(article) {
                 <img src="${article.image}" alt="${article.title}" class="article-image">
                 <div class="article-content">
                     <p>${article.content}</p>
-                    ${article.content.length < 200 ? '<p>For the full story, visit the original source website.</p>' : ''}
+                    <p class="original-source">Read the full story at the original source.</p>
                 </div>
                 <div class="modal-actions">
-                    <button class="gradient-btn" onclick="shareArticle('${article.title}', '${window.location.href}')">
+                    <button class="gradient-btn" onclick="window.open('${article.url}', '_blank')">
+                        <i class='bx bx-link-external'></i> Read Original Article
+                    </button>
+                    <button class="gradient-btn outline" onclick="shareArticle('${article.title}', '${article.url}')">
                         <i class='bx bx-share-alt'></i> Share
                     </button>
                     <button class="gradient-btn outline" onclick="bookmarkArticle(${article.id})">
@@ -736,12 +778,21 @@ function showArticleModal(article) {
                 color: var(--text-primary);
                 font-size: 1.1rem;
             }
+            .original-source {
+                font-style: italic;
+                color: var(--text-secondary);
+                margin-top: 20px;
+                padding: 10px;
+                background: var(--bg-secondary);
+                border-radius: 6px;
+            }
             .modal-actions {
                 display: flex;
                 gap: 10px;
                 margin-top: 25px;
                 padding-top: 20px;
                 border-top: 1px solid #eee;
+                flex-wrap: wrap;
             }
             .trending-badge {
                 position: absolute;
