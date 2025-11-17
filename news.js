@@ -1,4 +1,8 @@
+// Add debug message at top
+console.log('MarketScope News JS loaded successfully!');
+
 document.addEventListener("DOMContentLoaded", () => {
+    console.log('DOM fully loaded, initializing news...');
     // Initialize all functionality
     initNavigation();
     initializeNewsSearch();
@@ -16,6 +20,13 @@ let currentSearchTerm = '';
 // GNews API Configuration
 const GNEWS_API_KEY = '48a265f78bd308a6184a1f213edaf782';
 const GNEWS_BASE_URL = 'https://gnews.io/api/v4/top-headlines';
+
+// CORS Proxy URLs (fallback options)
+const CORS_PROXIES = [
+    'https://api.allorigins.win/raw?url=',
+    'https://corsproxy.io/?',
+    'https://cors-anywhere.herokuapp.com/'
+];
 
 // Navigation
 function initNavigation() {
@@ -45,6 +56,7 @@ function initializeNewsSearch() {
     const resultsInfo = document.getElementById('news-results-info');
 
     if (searchInput) {
+        console.log('Search input found, initializing...');
         // Real-time search with debouncing
         let searchTimeout;
         searchInput.addEventListener('input', (e) => {
@@ -78,6 +90,8 @@ function initializeNewsSearch() {
                 searchInput.focus();
             }
         });
+    } else {
+        console.log('Search input NOT found!');
     }
 }
 
@@ -86,6 +100,10 @@ function initializeFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const sortSelect = document.getElementById('sort-by');
     const loadMoreBtn = document.getElementById('load-more');
+
+    console.log('Found filter buttons:', filterBtns.length);
+    console.log('Found sort select:', !!sortSelect);
+    console.log('Found load more button:', !!loadMoreBtn);
 
     // Category filter buttons
     filterBtns.forEach(btn => {
@@ -134,6 +152,10 @@ async function loadNewsData() {
         const loadingEl = document.getElementById('loading');
         const newsGrid = document.getElementById('news-grid');
         
+        console.log('Loading news data...');
+        console.log('Loading element:', loadingEl);
+        console.log('News grid:', newsGrid);
+
         if (loadingEl) {
             loadingEl.style.display = 'block';
             loadingEl.innerHTML = `
@@ -157,6 +179,8 @@ async function loadNewsData() {
             allNews = newsData;
         }
 
+        console.log('Total news loaded:', allNews.length);
+
         // Hide loading state
         if (loadingEl) loadingEl.style.display = 'none';
         
@@ -171,7 +195,7 @@ async function loadNewsData() {
     }
 }
 
-// Fetch news from GNews API
+// Fetch news from GNews API with CORS proxy
 async function fetchGNews() {
     try {
         // Focus on business and financial news with more current results
@@ -181,20 +205,50 @@ async function fetchGNews() {
             country: 'us',
             max: '50',
             topic: 'business',
-            sortby: 'publishedAt' // Get most recent first
+            sortby: 'publishedAt'
         });
 
-        const response = await fetch(`${GNEWS_BASE_URL}?${params}`);
+        const apiUrl = `${GNEWS_BASE_URL}?${params}`;
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        console.log('Fetching from GNews API with CORS proxy...');
+        
+        // Try different CORS proxies until one works
+        let response;
+        let lastError;
+        
+        for (const proxy of CORS_PROXIES) {
+            try {
+                const proxyUrl = proxy + encodeURIComponent(apiUrl);
+                console.log(`Trying proxy: ${proxy}`);
+                
+                response = await fetch(proxyUrl, {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    timeout: 10000
+                });
+                
+                if (response.ok) {
+                    console.log(`Success with proxy: ${proxy}`);
+                    break;
+                }
+            } catch (error) {
+                console.log(`Proxy ${proxy} failed:`, error);
+                lastError = error;
+                continue;
+            }
+        }
+        
+        if (!response || !response.ok) {
+            throw new Error(`All CORS proxies failed. Last error: ${lastError?.message || 'Unknown error'}`);
         }
         
         const data = await response.json();
         
         if (data.articles && data.articles.length > 0) {
+            console.log('API returned articles:', data.articles.length);
             const transformedData = transformGNewsData(data.articles);
-            return optimizeTimestamps(transformedData); // Optimize timestamps
+            return optimizeTimestamps(transformedData);
         } else {
             throw new Error('No articles found in response');
         }
@@ -225,9 +279,9 @@ function transformGNewsData(articles) {
             source: article.source?.name || 'Unknown Source',
             author: 'News Source',
             readTime: calculateReadTime(content),
-            trending: Math.random() > 0.8, // Fewer trending articles
-            breaking: index < 2, // First 2 articles as breaking news
-            publishedAt: article.publishedAt // Keep original timestamp
+            trending: Math.random() > 0.8,
+            breaking: index < 2,
+            publishedAt: article.publishedAt
         };
     });
 }
@@ -237,7 +291,7 @@ function optimizeTimestamps(articles) {
     const now = new Date();
     return articles.map((article, index) => {
         // Make articles progressively older but keep them recent
-        const hoursAgo = Math.min(index * 0.5, 8); // Max 8 hours ago for 50 articles
+        const hoursAgo = Math.min(index * 0.5, 8);
         const optimizedTime = new Date(now - hoursAgo * 60 * 60 * 1000);
         
         return {
@@ -332,7 +386,7 @@ function generateFallbackNewsData() {
             excerpt: 'The Federal Reserve maintained interest rates but indicated potential cuts later this year as inflation shows signs of cooling.',
             content: 'In a widely anticipated decision, the Federal Open Market Committee voted to keep the benchmark interest rate unchanged. Chairman Powell emphasized that while inflation has moderated, the committee needs more confidence before considering rate cuts. Markets reacted positively to the dovish tone.',
             category: 'economy',
-            date: formatRelativeTime(new Date(now - 45 * 60 * 1000)), // 45 minutes ago
+            date: formatRelativeTime(new Date(now - 45 * 60 * 1000)),
             image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&auto=format&fit=crop',
             source: 'Reuters',
             author: 'Financial Desk',
@@ -347,7 +401,7 @@ function generateFallbackNewsData() {
             excerpt: 'Cryptocurrency markets rally as institutional investment in Bitcoin ETFs reaches record levels, driving prices to new yearly highs.',
             content: 'Bitcoin broke through the $45,000 resistance level amid strong institutional demand. Daily inflows into spot Bitcoin ETFs reached $250 million, the highest level in three months. Analysts attribute the surge to growing institutional adoption and positive regulatory developments.',
             category: 'crypto',
-            date: formatRelativeTime(new Date(now - 2 * 60 * 60 * 1000)), // 2 hours ago
+            date: formatRelativeTime(new Date(now - 2 * 60 * 60 * 1000)),
             image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&auto=format&fit=crop',
             source: 'CoinDesk',
             author: 'Crypto Analyst',
@@ -362,7 +416,7 @@ function generateFallbackNewsData() {
             excerpt: 'Major technology companies exceed earnings expectations, driven by strong performance in cloud computing and AI services.',
             content: 'Apple, Microsoft, and Google parent Alphabet all reported better-than-expected quarterly earnings. Cloud computing revenue grew by 25% year-over-year, while AI-driven services showed significant traction. The NASDAQ composite index reached a new all-time high following the reports.',
             category: 'stocks',
-            date: formatRelativeTime(new Date(now - 4 * 60 * 60 * 1000)), // 4 hours ago
+            date: formatRelativeTime(new Date(now - 4 * 60 * 60 * 1000)),
             image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&auto=format&fit=crop',
             source: 'Bloomberg',
             author: 'Tech Analyst',
@@ -377,7 +431,7 @@ function generateFallbackNewsData() {
             excerpt: 'The US dollar index fell after consumer price data came in lower than expected, boosting risk appetite in currency markets.',
             content: 'The DXY dollar index declined 0.6% following the release of cooler-than-expected inflation figures. EUR/USD climbed to 1.0950 while GBP/USD broke through 1.2750. Traders now price in a higher probability of Fed rate cuts in the second quarter.',
             category: 'forex',
-            date: formatRelativeTime(new Date(now - 6 * 60 * 60 * 1000)), // 6 hours ago
+            date: formatRelativeTime(new Date(now - 6 * 60 * 60 * 1000)),
             image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&auto=format&fit=crop',
             source: 'Financial Times',
             author: 'Forex Desk',
@@ -385,6 +439,36 @@ function generateFallbackNewsData() {
             trending: false,
             breaking: false,
             publishedAt: new Date(now - 6 * 60 * 60 * 1000).toISOString()
+        },
+        {
+            id: 5,
+            title: 'Global Markets Rally on Positive Economic Data',
+            excerpt: 'World markets show strong gains as economic indicators point to sustained growth and controlled inflation.',
+            content: 'Major global indices posted significant gains following the release of positive economic data from major economies. The positive sentiment was driven by better-than-expected manufacturing data and stable employment figures across developed markets.',
+            category: 'stocks',
+            date: formatRelativeTime(new Date(now - 8 * 60 * 60 * 1000)),
+            image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&auto=format&fit=crop',
+            source: 'Financial Times',
+            author: 'Market Analyst',
+            readTime: '4 min read',
+            trending: true,
+            breaking: false,
+            publishedAt: new Date(now - 8 * 60 * 60 * 1000).toISOString()
+        },
+        {
+            id: 6,
+            title: 'Ethereum Upgrade Boosts Blockchain Efficiency',
+            excerpt: 'Latest Ethereum network upgrade significantly improves transaction speed and reduces gas fees.',
+            content: 'The recent Ethereum network upgrade has successfully implemented key improvements to blockchain efficiency. Early data shows transaction speeds have increased by 40% while gas fees have dropped significantly, benefiting developers and users alike.',
+            category: 'crypto',
+            date: formatRelativeTime(new Date(now - 10 * 60 * 60 * 1000)),
+            image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&auto=format&fit=crop',
+            source: 'Crypto News',
+            author: 'Blockchain Expert',
+            readTime: '3 min read',
+            trending: false,
+            breaking: false,
+            publishedAt: new Date(now - 10 * 60 * 60 * 1000).toISOString()
         }
     ];
 }
@@ -465,7 +549,10 @@ function displayNews(newsItems) {
     const newsGrid = document.getElementById('news-grid');
     const noResults = document.getElementById('no-results');
     
-    if (!newsGrid) return;
+    if (!newsGrid) {
+        console.log('News grid not found!');
+        return;
+    }
     
     newsGrid.innerHTML = '';
 
@@ -855,16 +942,38 @@ function handleDataError(error) {
 // Test API connection
 async function testGNewsAPI() {
     try {
-        const response = await fetch(`https://gnews.io/api/v4/top-headlines?token=${GNEWS_API_KEY}&lang=en&country=us&max=5`);
-        const data = await response.json();
-        console.log('API Response Sample:', {
-            articlesCount: data.articles?.length,
-            firstArticle: data.articles?.[0] ? {
-                title: data.articles[0].title,
-                publishedAt: data.articles[0].publishedAt,
-                formattedTime: formatRelativeTime(data.articles[0].publishedAt)
-            } : 'No articles'
+        const params = new URLSearchParams({
+            token: GNEWS_API_KEY,
+            lang: 'en',
+            country: 'us',
+            max: '5'
         });
+
+        const apiUrl = `${GNEWS_BASE_URL}?${params}`;
+        
+        // Try with CORS proxy
+        for (const proxy of CORS_PROXIES) {
+            try {
+                const proxyUrl = proxy + encodeURIComponent(apiUrl);
+                const response = await fetch(proxyUrl);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('API Response Sample:', {
+                        articlesCount: data.articles?.length,
+                        firstArticle: data.articles?.[0] ? {
+                            title: data.articles[0].title,
+                            publishedAt: data.articles[0].publishedAt,
+                            formattedTime: formatRelativeTime(data.articles[0].publishedAt)
+                        } : 'No articles'
+                    });
+                    return;
+                }
+            } catch (error) {
+                continue;
+            }
+        }
+        throw new Error('All proxies failed');
     } catch (error) {
         console.error('API Test Failed:', error);
     }
@@ -874,19 +983,9 @@ async function testGNewsAPI() {
 setInterval(() => {
     console.log('Auto-refreshing news data...');
     refreshNews();
-}, 10 * 60 * 1000); // 10 minutes
+}, 10 * 60 * 1000);
 
 // Test API on load
 setTimeout(() => {
     testGNewsAPI();
 }, 2000);
-
-// Export for potential module usage
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        filterAndDisplayNews,
-        sortNews,
-        createNewsCard,
-        refreshNews
-    };
-}
